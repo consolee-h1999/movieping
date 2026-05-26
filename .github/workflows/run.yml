@@ -1,4 +1,4 @@
-name: Movie Watchlist Checker
+name: MoviePing (aka Mopi)
 
 on:
   schedule:

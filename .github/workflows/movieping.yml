@@ -1,0 +1,31 @@
+name: Movieping
+
+on:
+  schedule:
+    # Daily at 14:00 UTC (9:00 AM US Eastern during standard time)
+    - cron: "0 14 * * *"
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write users config (optional secret)
+        if: ${{ secrets.USERS_JSON != '' }}
+        env:
+          USERS_JSON: ${{ secrets.USERS_JSON }}
+        run: printf '%s\n' "$USERS_JSON" > users.json
+
+      - name: Run movieping
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: python main.py

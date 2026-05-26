@@ -1,0 +1,12 @@
+{
+  "users": [
+    {
+      "name": "Coco",
+      "email": "coxyhits@yahoo.com",
+      "discord_webhook_url": null,
+      "letterboxd_username": "cocoxx",
+      "letterboxd_list": "more-golden-hollywood",
+      "enabled": true
+    }
+  ]
+}

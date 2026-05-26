@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "name": "Your Name",
+      "email": "you@example.com",
+      "letterboxd_username": "your_letterboxd_username",
+      "letterboxd_list": null,
+      "enabled": true
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Movieping</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>Movieping</h1>
+    <p class="lead">
+      Get notified when films on your Letterboxd watchlist (or a list) are
+      screening at DC-area theatres.
+    </p>
+
+    <form id="signup">
+      <label>
+        Name
+        <input name="name" required autocomplete="name">
+      </label>
+      <label>
+        Email
+        <input name="email" type="email" required autocomplete="email">
+      </label>
+      <label>
+        Letterboxd username
+        <input name="letterboxd" required placeholder="cocoxx" pattern="[A-Za-z0-9_-]+">
+      </label>
+      <label>
+        List slug <span class="hint">(optional — leave blank for watchlist)</span>
+        <input name="list" placeholder="golden-hollywood-films-i-recommend">
+      </label>
+      <button type="submit">Generate signup entry</button>
+    </form>
+
+    <section id="result" hidden>
+      <h2>Add this to <code>users.json</code></h2>
+      <p class="hint">
+        v1 signups are manual: copy the entry below into
+        <code>users.json</code> in the GitHub repo (or send it to the repo owner).
+        Your Letterboxd watchlist or list must be <strong>public</strong>.
+      </p>
+      <textarea id="json-output" readonly rows="12"></textarea>
+      <button type="button" id="copy-btn">Copy to clipboard</button>
+    </section>
+
+    <section class="info">
+      <h2>How it works</h2>
+      <ol>
+        <li>Signups live in <code>users.json</code> in the repo.</li>
+        <li>GitHub Actions runs daily and scrapes local theatre sites.</li>
+        <li>Matches are posted to a Discord channel via webhook.</li>
+      </ol>
+    </section>
+  </main>
+  <script>
+    const form = document.getElementById("signup");
+    const result = document.getElementById("result");
+    const output = document.getElementById("json-output");
+    const copyBtn = document.getElementById("copy-btn");
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const list = (data.get("list") || "").trim();
+      const entry = {
+        name: data.get("name").trim(),
+        email: data.get("email").trim(),
+        letterboxd_username: data.get("letterboxd").trim(),
+        letterboxd_list: list || null,
+        enabled: true,
+      };
+      output.value = JSON.stringify(entry, null, 2) + ",";
+      result.hidden = false;
+      result.scrollIntoView({ behavior: "smooth" });
+    });
+
+    copyBtn.addEventListener("click", async () => {
+      await navigator.clipboard.writeText(output.value);
+      copyBtn.textContent = "Copied!";
+      setTimeout(() => { copyBtn.textContent = "Copy to clipboard"; }, 2000);
+    });
+  </script>
+</body>
+</html>

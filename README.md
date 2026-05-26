@@ -50,11 +50,11 @@ The signup page generates a JSON entry to paste into `users.json`. v1 does not a
 
 `.github/workflows/movieping.yml` runs daily (and on manual dispatch). It scrapes venues once, then checks each enabled user.
 
-**Works today (HTML):** Miracle Theatre, Library of Congress, Sunset Cinema.
+**Cinemas that work today:** Miracle Theatre, Library of Congress, Sunset Cinema.
 
-**Skipped (Cloudflare / JS):** Alamo Drafthouse, Kennedy Center.
+**Possible V2 improvements:** Alamo Drafthouse, Kennedy Center.
 
-## Discord webhook
+## Discord webhook (added note)
+I currently have MoviePing send alerts to my Discord channel for this, but soon (by V2), I may have it invite all users into that channel (and maybe even group them by city) so they can also receive automated notifications if they don't wish to receive them via email. 
 
-1. Discord server → channel → Integrations → Webhooks → New Webhook.
-2. Copy URL into `DISCORD_WEBHOOK_URL` secret (or per-user `discord_webhook_url` in `users.json`).
+

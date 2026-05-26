@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Movieping</title>
+  <title>MoviePing</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
     <h1>Movieping</h1>
     <p class="lead">
-      Get notified when films on your Letterboxd watchlist (or a list) are
+      Get notified when films on your Letterboxd watchlist (or a list from your profile) are
       screening at DC-area theatres.
     </p>
 
@@ -24,14 +24,14 @@
         <input name="email" type="email" required autocomplete="email">
       </label>
       <label>
-        Letterboxd username
+        Letterboxd username <span class="hint">Your profile has to be public.</span>
         <input name="letterboxd" required placeholder="cocoxx" pattern="[A-Za-z0-9_-]+">
       </label>
       <label>
-        List slug <span class="hint">(optional — leave blank for watchlist)</span>
+        List name <span class="hint">(optional — leave blank for user watchlist)</span>
         <input name="list" placeholder="golden-hollywood-films-i-recommend">
       </label>
-      <button type="submit">Generate signup entry</button>
+      <button type="submit">Sign me up MoPi!</button>
     </form>
 
     <section id="result" hidden>
@@ -49,8 +49,8 @@
       <h2>How it works</h2>
       <ol>
         <li>Signups live in <code>users.json</code> in the repo.</li>
-        <li>GitHub Actions runs daily and scrapes local theatre sites.</li>
-        <li>Matches are posted to a Discord channel via webhook.</li>
+        <li>GitHub Actions runs daily and scrapes local theatre sites to find screenings for your movie list.</li>
+        <li>Confirmed matches are posted to the Discord channel via webhook.</li>
       </ol>
     </section>
   </main>

@@ -19,12 +19,6 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Write users config (optional secret)
-        if: ${{ secrets.USERS_JSON != '' }}
-        env:
-          USERS_JSON: ${{ secrets.USERS_JSON }}
-        run: printf '%s\n' "$USERS_JSON" > users.json
-
       - name: Run movieping
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
